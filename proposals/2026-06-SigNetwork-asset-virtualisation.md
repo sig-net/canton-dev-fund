@@ -8,7 +8,7 @@
 
 ## Abstract
 
-Sig.Network requests $400,000 to give every Canton contract native access to the liquidity on Ethereum, Solana, and Hyperliquid: no bridges, no custodians, no wrapped tokens. We call this Asset Virtualisation.
+Sig.Network requests $400,000 to give every Canton contract native access to the liquidity on Ethereum, Solana: no bridges, no custodians, no wrapped tokens. We call this Asset Virtualisation.
 
 Canton is built for institutions, private, configurable, and with best-in-class access to RWAs and their markets. But Canton participants also want what only public chains provide today: 24-hour swap liquidity, always-on overcollateralised credit lines, liquid perpetuals markets for hedging, and whatever yield or structuring product DeFi ships next quarter.
 
