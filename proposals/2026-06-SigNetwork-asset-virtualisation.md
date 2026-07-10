@@ -1,77 +1,73 @@
-# Development Fund Proposal: Asset Virtualisation for Canton - Sig.Network
+# Sig.Network's Canton Asset Virtualisation
 
-**Author:** Sig.Network
-**Status:** Submitted
-**Created:** 2026-06-09
+| Field | Value |
+| :---- | :---- |
+| **Author** | Sig.Network |
+| **Status** | Submitted |
+| **Created** | 2026-06-09 |
+| **Label** | `app-building-developer-experience` |
+| **Champion** | TBD |
 
 ---
 
 ## Abstract
 
-Sig.Network requests $400,000 to give every Canton contract native access to the liquidity on Ethereum, Solana: no bridges, no custodians, no wrapped tokens. We call this Asset Virtualisation.
+Canton connects networks: participants transact across sub-networks natively, privately, and atomically. Asset Virtualisation extends that reach beyond Canton's borders, giving every Canton contract native access to the users, assets, and liquidity of Ethereum and Solana. Assets stay native on their home chains, controlled directly by Canton contracts, with Canton's privacy and settlement guarantees intact.
 
-Canton is built for institutions, private, configurable, and with best-in-class access to RWAs and their markets. But Canton participants also want what only public chains provide today: 24-hour swap liquidity, always-on overcollateralised credit lines, liquid perpetuals markets for hedging, and whatever yield or structuring product DeFi ships next quarter.
+This solves Canton DeFi's cold-start problem: applications accept deposits straight from external wallets and exchange accounts, and reach venues such as Uniswap, Aave, Raydium, and later Hyperliquid. External capital arrives as Canton participants and Canton settlement volume.
 
-Today this ecosystem lives on Ethereum, Solana, and Hyperliquid, and it is hard to move. Sig.Network gives Canton applications the reach of a prime brokerage: one venue, every market, settled on Canton.
-
-Broadly, Asset Virtualisation is a general-purpose technology which can:
-- Accept deposits from any chain, directly from that chain's wallets and exchange accounts
-- Withdraw funds to native or Canton accounts
-- Access foreign-chain DeFi liquidity (e.g. Uniswap, Aave, Raydium, Hyperliquid)
-
-This proposal funds the core primitive and its Ethereum, Solana, and further EVM deployments. The same foundation then carries every chain that follows: Hyperliquid and other networks will be scoped in later proposals.
-
-Asset Virtualisation solves Canton DeFi's cold-start problem. Applications get immediate access to external liquidity and the DeFi products users already rely on: looping, leverage, yield. Canton's privacy, regulated-market access, and fast finality become strictly additive.
-
-Temple, Canton's first institutional CLOB, and Bima, a Bitcoin-derived stablecoin, are the reference deployers for this work. The open-source SDK delivered alongside makes Asset Virtualisation available to every Canton application. It is ecosystem infrastructure, not a single-application integration.
-
-The team executing this integration built NEAR Chain Signatures, the foundational technology underpinning this work. David Millar-Durrant (CEO; ex-Digital Asset, Dfinity, NEAR) leads delivery. Ognjen Marić, author of the original Canton Network whitepaper, advises on architectural design.
-
-Sig.Network is already live in production on Ethereum and Solana. This grant brings that system to Canton.
-
----
-
-## Attestations
-
-> "The team behind Sig.Network have a long history of working with DAML and Canton technology. They are familiar with the network and liquidity fragmentation issues that have plagued interoperability protocols in the past. With their solution, Temple can offer Asset and Market Virtualization to our partners. This unlocks a very large design space for Temple and the industry as a whole."
->
-> - **Dan Simerman, Co-Founder, [Temple Digital Group](https://templedigitalgroup.com/)**
-
-> "We’re going to use the product to enable native Collar loans on Canton and for our CDP product."
->
-> - **Sid Sridhar, Founder, [Bima](https://bima.money/)**
-
-> "[Sig.Network] transforms Minted's cross-chain architecture from a validator multisig model to decentralized MPC threshold signing, while enabling multi-chain expansion starting with Solana. Sig's existing Canton POC and production Solana deployment significantly de-risk execution."
->
-> - **Luis Cuello, Founder & CEO, [Minted](https://minted.app)**
-
-> "Canton has the institutional rails; Yieldy brings everyday crypto users. Using Sig's network, our app lets Solana and EVM users deposit straight into Canton contracts, with our risk engine routing capital to safe yield. This is a path for crypto-native capital to progressively onboard into Canton's RWA yield."
->
-> - **Alex Dimitrijevic, Co-Founder & CEO, [Yieldy](https://yieldy.io/)**
+We request $400,000 across five milestones to deliver the Ethereum, Solana, BNB, and Polygon integrations as an open-source SDK any Canton application can adopt. $150,000 is gated on adoption, not delivery. Milestone 1, the Ethereum integration and public SDK, is already delivered: Bima is building on it now, with Temple, Yieldy, and Minted committed.
 
 ---
 
 ## Motivation
 
-At its core, Canton is a technology for connecting separate networks: participants transact across sub-networks natively, privately, and atomically. Sig.Network extends that reach beyond Canton's borders, to the assets and liquidity of public blockchains, starting with Ethereum and Solana. Those chains have the liquidity, Canton has what they lack: privacy, synchronised settlement, and regulated RWA markets. We bring the two together for all Canton participants.
+### The Opportunity
 
-Canton's institutional market infrastructure is live. But a Canton application today can only serve users who already hold Canton's tokenised assets, a fraction of the cryptocurrency capital that should be deploying here. That capital will not arrive on its own, institutions will not bridge, wrap, or re-custody assets to reach a new network when it lacks markets for those assets.
+Public blockchains have the liquidity; Canton has what they lack: privacy, synchronised settlement, and regulated RWA markets. Asset Virtualisation brings the two together for all Canton participants, starting with Ethereum and Solana.
 
-We are building Asset Virtualisation for Canton because Canton's applications are already asking for it. Temple needs order books backed by collateral that lives on Ethereum and Solana. Bima needs external collateral behind its credit lines. Yieldy wants to bring its everyday crypto users, and their capital, onto Canton. Different applications, all missing one thing: native access to cross-chain assets, protocols and liquidity.
+### The Problem
 
-The alternatives on file are wrapped token bridges ([#13](https://github.com/canton-foundation/canton-dev-fund/pull/13), [#147](https://github.com/canton-foundation/canton-dev-fund/pull/147)). Wrapped tokens cannot be deposited from CEXs or custody accounts, strand assets outside their home ecosystem's markets, and are a user experience nightmare.
+Canton's institutional market infrastructure is live, but a Canton application today can only serve users who already hold Canton's tokenised assets, a fraction of the cryptocurrency capital that should be deploying here. That capital will not arrive on its own: institutions will not bridge, wrap, or re-custody assets to reach a new network when it lacks markets for those assets.
+
+Canton's applications are already asking for the fix. Temple needs order books backed by collateral that lives on Ethereum and Solana. Bima needs external collateral behind its credit lines. Yieldy wants to bring its everyday crypto users, and their capital, onto Canton. Different applications, all missing one thing: native access to cross-chain assets, protocols and liquidity.
+
+The alternatives on file are wrapped token bridges ([#13](https://github.com/canton-foundation/canton-dev-fund/pull/13), [#147](https://github.com/canton-foundation/canton-dev-fund/pull/147)). Wrapped tokens cannot be deposited from CEXs or custody accounts, strand assets outside their home ecosystem's markets, and are a poor user experience.
+
+### Why Sig.Network
+
+Sig.Network is live in production on Ethereum and Solana today, built by the team that created NEAR Chain Signatures, the technology this work is built on. Canton is the next deployment of a proven system, not greenfield research; this grant de-risks and accelerates a delivery already underway.
+
+The team knows both worlds. David Millar-Durrant (CEO; ex-Digital Asset, Dfinity, NEAR) leads delivery. Ognjen Marić, author of the original Canton Network whitepaper, advises on architecture.
+
+### Deployers
+
+Four Canton teams have committed to build specific products on Asset Virtualisation:
+
+| Project | Committed product |
+|---|---|
+| [Temple](https://templedigitalgroup.com/) (reference deployer) | Asset and Market Virtualization for Canton's first institutional CLOB |
+| [Bima](https://bima.money/) | Native Collar loans and a CDP product on Canton |
+| [Yieldy](https://yieldy.io/) | Onboarding Solana and EVM users into Canton's RWA yield |
+| [Minted](https://minted.app) | MPC threshold signing and multi-chain expansion for mUSD |
+
+Temple, the reference deployer, will build on it first:
+
+> "The team behind Sig.Network have a long history of working with DAML and Canton technology. They are familiar with the network and liquidity fragmentation issues that have plagued interoperability protocols in the past. With their solution, Temple can offer Asset and Market Virtualization to our partners. This unlocks a very large design space for Temple and the industry as a whole."
+>
+> - **Dan Simerman, Co-Founder, [Temple Digital Group](https://templedigitalgroup.com/)**
 
 ---
 
 ## Use cases
 
-What we're building is a highly general technology that extends Canton network's reach to other networks. Rather than technology in general, we've selected a few use cases, many of which our partners are already building.
+Asset Virtualisation is a general primitive. Rather than describe it in the abstract, we show four use cases, most of which our partners are already building.
 
 ### CEX like DeFi
 
 An institution's digital-asset operations are split across exchange accounts, and a wallet per chain for DeFi opportunities. A CEX rebundles them into one account, but only by taking custody, and even then the account stops at the exchange's own venues: DeFi credit, long-tail pairs, and on-chain yield stay outside.
 
-**Problem 1: an on-chain venue is capped at its own chain's assets.** A Canton venue today can only list what is already tokenised on Canton, and a user's collateral on Ethereum or Solana cannot back a position on it. This is a large part of why custodial venues still clear 90% of cryptocurrency trading volume: the only venues offering the full asset universe and margining against it are custodial. No one wants to be constrained to participating in a subset of markets.
+**Problem 1: an on-chain venue is capped at its own chain's assets.** A Canton venue today can only list what is already tokenised on Canton, and a user's collateral on Ethereum or Solana cannot back a position on it. This is a large part of why custodial venues still clear 90% of cryptocurrency trading volume: the only venues offering the full asset universe and margining against it are custodial.
 
 **Problem 2: traders choose between CEX order books and DeFi liquidity.** The deep order books live on custodial venues; the credit lines, long-tail pairs, perpetuals, and yield live in DeFi. No venue reaches both, so a desk splits its capital between exchange accounts and per-chain wallets, and pays in time and risk every time the trade is on the other side.
 
@@ -82,7 +78,7 @@ An institution's digital-asset operations are split across exchange accounts, an
 - Sweep idle balances into Aave, and recall them the moment an order needs the margin
 - Route an order to Uniswap or Raydium when the on-chain pool is deeper than the book
 
-Every step settles as a standard Canton transaction, with Canton's privacy intact and no custodial intermediary. A Temple account is therefore both things at once: the place where assets from every chain are held, and the place where they participate in every market, exchange books and DeFi alike, without anyone taking custody. Every external depositor this attracts becomes a Canton participant, and every fill becomes Canton settlement volume.
+Every step settles as a standard Canton transaction, with Canton's privacy intact and no custodial intermediary. Every external depositor this attracts becomes a Canton participant, and every fill becomes Canton settlement volume.
 
 ### Efficient off-chain matching
 
@@ -98,14 +94,6 @@ These venues share two structural problems.
 **Problem 2: Trades can't be chained atomically.** Suppose one engine has deep Solana liquidity and another deep Ethereum liquidity. To execute an ETH→SOL trade, a solver breaks it into an ETH→USDC leg on the first book and a USDC→SOL leg on the second. Because the legs settle independently, the maker has to price the risk that one leg fills while the other fails, and carry the cost of unwinding it.
 
 **Resolution.** Bringing the order books onto Canton solves both. Capital backs every book from a single synchronised position, so there is no redeployment lag, and multi-leg trades settle atomically as one Canton transaction, accessible from the whole ecosystem. Sub-transaction privacy means none of this leaks order-book contents to other market participants. Finally, since the cross-chain assets are controlled directly by Canton smart contracts, settlement is guaranteed. 
-
-### Moving existing crypto applications to Canton
-
-Canton's cold-start problem has an application side as well as a liquidity side: established DeFi applications have users and TVL on other chains, and deploying on Canton means starting from zero.
-
-**Problem: migrating an application means asking its users to migrate first.** An application's users hold their assets on its current chains and will not bridge them. So the application either stays where its users are, or deploys on Canton with no users and no TVL on day one.
-
-**Resolution.** With Asset Virtualisation, an application deploys its logic on Canton while its users keep transacting from their existing chains and wallets, so it arrives with its user base and TVL intact and gains Canton's privacy and RWA markets on arrival. Yieldy intends to migrate their Ethereum and Solana native users to Canton this way. Similarly Bima brings it's CDP product credit lines to Canton, borrowing against Bitcoin-LST collateral its users keep on Ethereum, settling back to their home-chain addresses. Every application that arrives like this deepens Canton's liquidity and number of market participants.
 
 ### Collateral compatible with every market
 
@@ -132,29 +120,48 @@ Asset Virtualisation keeps the issuer functions on Canton and lets the financing
 
 The same collateral is then financed wherever stablecoin liquidity is deepest (e.g. Aave Horizon on Ethereum) and the proceeds deployed wherever the position is (e.g. Hyperliquid). For the desk, that is access to new pools of capital at any hour of the day, including when the security's home market is closed. For the issuer, it is one back office serving every chain and collateral mobility.
 
-<!-- Proof read to here -->
+> "We’re going to use the product to enable native Collar loans on Canton and for our CDP product."
+>
+> - **Sid Sridhar, Founder, [Bima](https://bima.money/)**
+
+### Moving existing crypto applications to Canton
+
+Canton's cold-start problem has an application side as well as a liquidity side: established DeFi applications have users and TVL on other chains, and deploying on Canton means starting from zero.
+
+**Problem: migrating an application means asking its users to migrate first.** An application's users hold their assets on its current chains and will not bridge them. So the application either stays where its users are, or deploys on Canton with no users and no TVL on day one.
+
+**Resolution.** With Asset Virtualisation, an application deploys its logic on Canton while its users keep transacting from their existing chains and wallets, so it arrives with its user base and TVL intact and gains Canton's privacy and RWA markets on arrival. Yieldy intends to migrate its Ethereum and Solana native users to Canton this way. Similarly, Bima brings its CDP credit lines to Canton, borrowing against Bitcoin-LST collateral its users keep on Ethereum, settling back to their home-chain addresses. Every application that arrives like this deepens Canton's liquidity and number of market participants.
+
+> "Canton has the institutional rails; Yieldy brings everyday crypto users. Using Sig's network, our app lets Solana and EVM users deposit straight into Canton contracts, with our risk engine routing capital to safe yield. This is a path for crypto-native capital to progressively onboard into Canton's RWA yield."
+>
+> - **Alex Dimitrijevic, Co-Founder & CEO, [Yieldy](https://yieldy.io/)**
+
 
 ## Specification
 
 ### 1. Objective
 
-<!-- Enable users on Ethereum, Solana, and additional networks to deposit and withdraw native assets into Canton applications using standard wallets, with no bridging, wrapping, or new infrastructure on the user's side. Deliver an open-source Asset Virtualisation SDK that any Canton application can adopt. -->
+Deliver shared, open-source ecosystem infrastructure for Canton that:
 
-To extend the reach of Canton contracts to external assets, liquidity and protocols.
+- **Solves Canton DeFi's cold-start problem** by giving any Canton application native access to the users, assets, and liquidity of Ethereum and Solana, with no bridging, wrapping, or new infrastructure on the user's side.
+- **Gives Canton participants best execution** by extending the reach of Canton contracts to external protocols and venues (Uniswap, Aave, Raydium, Hyperliquid), so one Canton account reaches every market.
+- **Ships as an open-source SDK** (DAML and TypeScript) that any Canton application can adopt, with Temple as the reference deployer.
+- **Is paid on adoption, not just delivery**: two applications in production (Milestone 2) and $1M of organic 30-day volume (Milestone 3) are funded milestones.
 
 ### 2. Implementation Mechanics
 
 **How Asset Virtualisation works:**
 
-1. A user initiates a transaction on their home chain (e.g., ETH deposit from MetaMask)
-2. Sig's decentralised MPC validator network detects the action and constructs the canonical Canton transaction
-3. Sig signs and submits the transaction to the Canton application using chain-signature cryptography
-4. The Canton application executes it as a standard Canton transaction: privacy, compliance controls, and settlement guarantees intact
-5. Settlement flows back to the user's home-chain address via the same MPC path
+A Canton application controls accounts on Ethereum and Solana through Sig's decentralised MPC validator network. No single party holds the keys: the network signs a home-chain transaction only when the Canton contract instructs it to.
 
-No assets are locked. No wrapped tokens are minted. The home-chain asset remains real and unencumbered throughout. External liquidity is accessible to Canton applications in real time, without creating synthetic representations of those assets on Canton.
+1. A user deposits native assets to a home-chain deposit address derived for them by the MPC network (e.g. ETH from MetaMask).
+2. Sig's validators observe the deposit and sign a sweep transaction, moving the funds from the user's deposit address into the application's pooled home-chain account, then submit the matching Canton transaction so the application credits the user on Canton, with privacy, compliance controls, and settlement guarantees intact.
+3. The user transacts on Canton against that balance like any other Canton asset.
+4. To withdraw or reach external liquidity (Uniswap, Aave, Raydium), the Canton contract instructs Sig's network to sign the corresponding home-chain transaction; assets move natively, back to the user's own address.
 
-**Deliverables per milestone:** a live mainnet integration for each supported chain, and an open-source, DAML and TypeScript SDK with Temple as the reference implementation. We also can deploy on an EVM on Canton chain if we see adoption.
+The assets stay native on their home chain throughout. Nothing is locked in a bridge and no wrapped tokens are minted: Canton applications act on the real external assets directly.
+
+**Deliverables per milestone:** a live mainnet integration for each supported chain, and an open-source DAML and TypeScript SDK with Temple as the reference implementation.
 
 ### 3. Architectural Alignment
 
@@ -162,49 +169,84 @@ Asset Virtualisation is designed around Canton's core properties:
 
 | Canton Property | How Asset Virtualisation Preserves It |
 |---|---|
-| Sub-transaction privacy | External chain actions resolve to Canton identities; external observers see standard home-chain transactions, not Canton order flow |
+| Sub-transaction privacy | Canton smart contracts hold accounts, external chains only see that that application is taking an action, not the Canton part of the trade |
 | DAML transaction model | Sig converts external actions into standard Canton transactions; Canton applications process them identically to native transactions |
 | Settlement guarantees | Assets remain on home chains; settlement paths are cryptographically bound; no custodial intermediary |
 | No custody assumption | Sig's MPC holds policy-bound signing authority, not funds |
 
 No Canton protocol changes are required. Applications opt in by calling Sig's Canton smart contracts to perform multichain actions; beyond adding those calls, existing application contracts are unchanged.
 
+This proposal sits squarely in the Q2 2026 priority area of **App Building and Developer Experience**: it delivers interoperability across wallets, assets, and dApps, and removes the largest source of user friction, reaching Canton applications from standard external wallets.
+
 ### 4. Backward Compatibility
 
 No backward compatibility impact. All components are additive. Existing Canton participants and Canton protocol behaviour are unchanged.
-
-### 5. Alignment with Canton Priorities
-
-This proposal sits squarely in the Q2 2026 priority area of **App Building and Developer Experience**: it delivers interoperability across wallets, assets, and dApps, and removes the largest source of user friction, reaching Canton applications from standard external wallets. The open-source SDK is a shared ecosystem asset rather than a single-team integration, and adoption is the funded measure of success: Milestone 2 requires two applications live in production and Milestone 3 requires $1M of organic volume.
 
 ---
 
 ## Milestones and Deliverables
 
 ### Milestone 1: Mainnet - Ethereum + Open-Source SDK
-- **Estimated Delivery:** July 1, 2026
-- **Focus:** End-to-end Ethereum integration validated on Canton DevNet, then launched to production. Ethereum users can deposit and withdraw native assets into Canton applications via standard wallets. SDK publicly released.
-- **Deliverables / Value Metrics:** Full Ethereum deposit and withdrawal flow demonstrated end-to-end on Canton DevNet, SDK integration complete and reviewed by Temple, live mainnet integration (Ethereum), open-source Asset Virtualisation SDK published with documentation.
+
+| Field | Value |
+| :---- | :---- |
+| **Estimated Delivery** | July 1, 2026 (delivered) |
+| **Focus** | End-to-end Ethereum integration validated on Canton DevNet, then launched to production. SDK publicly released. |
+
+**Deliverables / Value Metrics:**
+
+- Full Ethereum deposit and withdrawal flow demonstrated end-to-end on Canton DevNet
+- SDK integration complete and reviewed by Temple
+- Live mainnet integration (Ethereum): Ethereum users can deposit and withdraw native assets into Canton applications via standard wallets
+- Open-source Asset Virtualisation SDK published with documentation
 
 ### Milestone 2: Mainnet - Application Adoption
-- **Estimated Delivery:** August 1, 2026
-- **Focus:** The SDK proves out as ecosystem infrastructure: two Canton application development teams running Asset Virtualisation in production.
-- **Deliverables / Value Metrics:** Two Canton applications live on Canton mainnet processing transactions through the Asset Virtualisation SDK
+
+| Field | Value |
+| :---- | :---- |
+| **Estimated Delivery** | September 1, 2026 |
+| **Focus** | The SDK proves out as ecosystem infrastructure: two Canton application teams running Asset Virtualisation in production. |
+
+**Deliverables / Value Metrics:**
+
+- Two Canton applications live on Canton mainnet processing transactions through the Asset Virtualisation SDK
 
 ### Milestone 3: User Adoption
-- **Estimated Delivery:** November 1, 2026
-- **Focus:** Demonstrated production usage of the integrations delivered in the preceding milestones.
-- **Deliverables / Value Metrics:** Minimum $1M in organic deposit and withdrawal volume within any 30-day window on Canton mainnet. Doesn't block Milestones 4 or 5.
+
+| Field | Value |
+| :---- | :---- |
+| **Estimated Delivery** | November 1, 2026 |
+| **Focus** | Demonstrated production usage of the integrations delivered in the preceding milestones. Does not block Milestones 4 or 5. |
+
+**Deliverables / Value Metrics:**
+
+- Minimum $1M in organic deposit and withdrawal volume within any 30-day window on Canton mainnet
 
 ### Milestone 4: Mainnet - Solana
-- **Estimated Delivery:** November 1, 2026
-- **Focus:** Native Solana asset deposits and withdrawals. Unlocks SOL and Solana-native assets and liquidity within Canton's institutional markets.
-- **Deliverables / Value Metrics:** Live mainnet Solana integration; open-source Solana chain adapter; documentation; SOL and Solana-native assets accessible on Canton
 
-### Milestone 5: Mainnet - Additional EVM Networks
-- **Estimated Delivery:** December 1, 2026
-- **Focus:** Expand to BNB and Polygon, broadening the native liquidity and asset classes accessible on Canton.
-- **Deliverables / Value Metrics:** Live mainnet integrations for two additional EVM networks; SDK updated with new chain adapters; network-specific documentation published; demonstrated live use of a swap provider (e.g. Uniswap) and a yield provider (e.g. Aave) with virtualised assets on at least one supported chain
+| Field | Value |
+| :---- | :---- |
+| **Estimated Delivery** | November 1, 2026 |
+| **Focus** | Native Solana asset deposits and withdrawals. Unlocks SOL and Solana-native assets and liquidity within Canton's institutional markets. |
+
+**Deliverables / Value Metrics:**
+
+- Live mainnet Solana integration
+- Open-source Solana chain adapter with documentation
+- SOL and Solana-native assets accessible on Canton
+
+### Milestone 5: Mainnet - BNB + Polygon
+
+| Field | Value |
+| :---- | :---- |
+| **Estimated Delivery** | December 1st, 2026 |
+| **Focus** | Expand to BNB and Polygon, each chosen for a distinct market. BNB carries Binance's retail flows and its user base across MENA and Asia. Polygon hosts Polymarket's prediction markets and is a home chain for tokenised funds, including BlackRock's BUIDL and Franklin Templeton's BENJI. |
+
+**Deliverables / Value Metrics:**
+
+- Live mainnet integrations for BNB and Polygon. 
+- SDK updated with new chain adapters; network-specific documentation published
+- Demonstrated live use of a swap provider (e.g. Uniswap) and a yield provider (e.g. Aave) with virtualised assets on at least one supported chain
 
 ---
 
@@ -216,8 +258,8 @@ The Tech & Ops Committee will evaluate completion based on:
 - Open-source SDK published to a public repository with integration documentation
 - Temple live with external-chain users executing transactions through the integration
 - Two Canton applications live on mainnet using the integration by M2
-- From M5 (Additional EVM Networks) onwards: demonstrated live use of a swap provider (e.g. Uniswap) and a yield provider (e.g. Aave) with virtualised assets on each supported chain
 - Volume metric met at M3: $1M deposit/withdrawal volume within any 30-day window on Canton mainnet
+- At M5: demonstrated live use of a swap provider (e.g. Uniswap) and a yield provider (e.g. Aave) with virtualised assets on at least one supported chain
 
 ---
 
@@ -227,11 +269,15 @@ The Tech & Ops Committee will evaluate completion based on:
 
 ### Payment Breakdown by Milestone
 
-- Milestone 1 (Mainnet - Ethereum + SDK): $150,000 CC equivalent upon committee acceptance
-- Milestone 2 (Application Adoption): $50,000 CC equivalent upon committee acceptance
-- Milestone 3 (User Adoption): $100,000 CC equivalent upon committee acceptance
-- Milestone 4 (Mainnet - Solana): $50,000 CC equivalent upon committee acceptance
-- Milestone 5 (Mainnet - 2 Additional EVMs): $50,000 CC equivalent upon committee acceptance
+| Milestone | Focus | Amount | Trigger |
+| :---- | :---- | :---: | :---- |
+| **M1** | Mainnet - Ethereum + SDK | $150,000 | Committee acceptance |
+| **M2** | Application Adoption | $50,000 | Committee acceptance |
+| **M3** | User Adoption | $100,000 | Committee acceptance |
+| **M4** | Mainnet - Solana | $50,000 | Committee acceptance |
+| **M5** | Mainnet - BNB + Polygon | $50,000 | Committee acceptance |
+
+All amounts are paid as the CC equivalent of the USD value. $150,000 of the $400,000 total (M2 + M3) is gated on adoption rather than delivery.
 
 ### Volatility Stipulation
 
@@ -251,7 +297,7 @@ Temple Digital Group, as the first production user of the integration, will prov
 
 ---
 
-## Maintenance and Sustainability
+## Maintenance
 
 The Asset Virtualisation SDK and the underlying validator network are part of Sig.Network's core product. Sig.Network operates and maintains both after the grant period, exactly as it does for the live Ethereum and Solana deployments today. The SDK is open source, so the Canton ecosystem retains the integration layer under an open licence regardless.
 
@@ -259,11 +305,13 @@ The Asset Virtualisation SDK and the underlying validator network are part of Si
 
 ## Rationale
 
-**Why Sig.Network:**
+**Why fund this now:**
 
-This integration needs a team that knows both worlds, and ours does: familiar with Canton and its clients, with a strong background in DeFi and cross-chain infrastructure. Sig.Network on Canton is the next deployment of a proven system, not greenfield research.
+Asset Virtualisation is the foundational layer for future Canton capabilities, including cross-chain access to tokenised assets and sequencer interoperability with other networks, but those are distinct workstreams. This grant funds the core primitive those capabilities will build on.
 
-This grant de-risks and accelerates a delivery already underway. Asset Virtualisation is also the foundational layer for future Canton capabilities, including cross-chain access to tokenised assets and sequencer interoperability with other networks, but those are distinct workstreams. This grant funds the core primitive those capabilities will build on.
+> "[Sig.Network] transforms Minted's cross-chain architecture from a validator multisig model to decentralized MPC threshold signing, while enabling multi-chain expansion starting with Solana. Sig's existing Canton POC and production Solana deployment significantly de-risk execution."
+>
+> - **Luis Cuello, Founder & CEO, [Minted](https://minted.app)**
 
 **Why this approach over a bridge:**
 
