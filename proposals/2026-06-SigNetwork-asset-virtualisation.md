@@ -14,7 +14,7 @@
 
 Canton grew by deploying on top of the ledgers institutions already used, and letting atomic, private settlement drive volume onto the network. [Sig.Network](https://docs.sig.network/) lets Canton do the same for all of on-chain finance, deploying on top of the popular public chains and giving Canton applications direct access to their assets and markets.
 
-Asset Virtualisation is how, Canton contracts directly control accounts on Ethereum, Solana, and other chains. Assets never leave their home chains and stay usable there natively, with Canton's privacy and settlement guarantees intact.
+Sig.Network Asset Virtualisation allows Canton contracts to directly control accounts on Ethereum, Solana, and other chains. Assets never leave their home chains and stay usable there natively, with Canton's privacy and settlement guarantees intact.
 
 This solves Canton DeFi's cold-start problem, applications accept deposits on other chains straight from external wallets and exchange accounts, and the ETH a Canton contract holds can still be swapped on Uniswap or deposited on Aave. Onboarding to Canton becomes as easy as depositing to a CEX.
 
