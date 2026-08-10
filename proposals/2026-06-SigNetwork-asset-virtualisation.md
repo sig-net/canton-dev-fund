@@ -18,7 +18,7 @@ Sig.Network Asset Virtualisation allows Canton contracts to directly control acc
 
 This solves Canton DeFi's cold-start problem, applications accept deposits on other chains straight from external wallets and exchange accounts, and the ETH a Canton contract holds can still be swapped on Uniswap or deposited on Aave. Onboarding to Canton becomes as easy as depositing to a CEX.
 
-We request $400,000 across five milestones to deliver the Ethereum, Solana, BNB, and Polygon integrations as an open-source SDK any Canton application can adopt. $150,000 is gated on adoption, not delivery. Milestone 1, the Ethereum integration and public SDK, is already delivered: [Bima](https://bima.money/) is building on it today, and [Temple](https://templedigitalgroup.com/), [Yieldy](https://yieldy.io/), and [Minted](https://minted.app) are committed.
+We request $400,000 across five milestones to deliver the Ethereum, Solana, BNB, and Polygon integrations as an open-source SDK any Canton application can adopt. $150,000 is gated on adoption, not delivery. Milestone 1, the Ethereum integration and public SDK, is already delivered: [Bima](https://bima.money/) is building on it today, and [Temple](https://templedigitalgroup.com/), [Ekiden](https://ekiden.fi/), [Yieldy](https://yieldy.io/), and [Minted](https://minted.app) are committed.
 
 ---
 
@@ -56,11 +56,12 @@ David Millar-Durrant (CEO; ex-Digital Asset, Dfinity, NEAR) leads delivery. Ognj
 
 ### Deployers
 
-Four Canton teams have committed to build specific products on Asset Virtualisation:
+Five Canton teams have committed to build specific products on Asset Virtualisation:
 
 | Project | Committed product |
 |---|---|
 | [Temple](https://templedigitalgroup.com/) | Asset and Market Virtualization for Canton's first institutional CLOB |
+| [Ekiden](https://ekiden.fi/) | Cross-chain spot liquidity backing Canton's first perpetuals venue |
 | [Bima](https://bima.money/) | Native Collar loans and a CDP product on Canton |
 | [Yieldy](https://yieldy.io/) | Onboarding Solana and EVM users into Canton's RWA yield |
 | [Minted](https://minted.app) | MPC threshold signing and multi-chain expansion for mUSD |
@@ -94,20 +95,15 @@ An institution's digital-asset operations are split across exchange accounts, an
 
 Every step settles as a standard Canton transaction, with Canton's privacy intact and no custodial intermediary. Every external depositor this attracts becomes a Canton participant, and every fill becomes Canton settlement volume.
 
-### Efficient off-chain matching
+### Spot-backed yield for perp markets
 
-Off-chain matching with on-chain settlement is now a dominant market structure:
-- Polymarket runs an off-chain matching engine ($10B per month[^1])
-- NEAR Intents runs an RFQ engine against locked assets ($2B per month[^1])
-- CoW Swap lets searchers match orders, then offloads settlement to on-chain liquidity ($2B per month[^1])
+A perpetual future stays priced correctly through arbitrage. When demand pushes the perp above the spot, someone has to sell the perp and buy spot to pull the two prices back together, and the funding rate exists to incentivise them to do it. How cheaply that trade executes determines how tightly the perp holder can track its underlying.
 
-These venues share two structural problems.
+**Problem 1: the realignment trade spans venues that don't share capital.** The perp trades on Canton, on a venue like [Ekiden](https://ekiden.fi/), the network's first perpetuals CLOB and our reference deployer for this use case; the spot leg trades wherever the asset is deepest, e.g. Ethereum for tokenised gold, Solana for SOL. To execute both legs together, an arbitrageur today must pre-position inventory on every venue and rebalance it continuously. Only desks with balance sheet on every chain can run the trade, they charge for that cost in the funding they demand, and a new venue launches with none of them present.
 
-**Problem 1: Capital is trapped in one venue at a time.** A market maker's capital can only back orders on one contract at a time. If their ETH is committed on CoW Swap and a profitable order lands on NEAR Intents, they can't redeploy in time: auction windows plus chain finality run to minutes, and the auction is gone. The alternative, committing capital and settling later, slows execution. Either way, fragmentation raises the cost of capital to market-make.
+**Problem 2: expensive arbitrage means the perp fails at its job.** A trader who buys a one-ounce gold perp expects to receive the dollar value of one ounce of gold whenever they sell, even a year later. If realignment capital is scarce, funding runs high and volatile, the position bleeds carry, and the instrument stops being a viable way to hold exposure. High funding also caps how large the long side, and therefore the venue's open interest, can grow.
 
-**Problem 2: Trades can't be chained atomically.** Suppose one engine has deep Solana liquidity and another deep Ethereum liquidity. To execute an ETH→SOL trade, a solver breaks it into an ETH→USDC leg on the first book and a USDC→SOL leg on the second. Because the legs settle independently, the maker has to price the risk that one leg fills while the other fails, and carry the cost of unwinding it.
-
-**Resolution.** Bringing the order books onto Canton solves both. Capital backs every book from a single synchronised position, so there is no redeployment lag, and multi-leg trades settle atomically as one Canton transaction, accessible from the whole ecosystem. Sub-transaction privacy means none of this leaks order-book contents to other market participants. Finally, since the cross-chain assets are controlled directly by Canton smart contracts, settlement is guaranteed. 
+**Resolution.** Asset Virtualisation lets capital held by a Canton application trade on any venue directly. A yield vault on Canton accepts whatever assets users deposit, from any chain, and when the perp trades rich, sells the perp on Ekiden and buys spot on whichever venue is deepest, as a single flow controlled by Canton contracts. One pool of capital backs the trade everywhere: no inventory stranded per venue, no bridging leg, no unwind risk priced in. Because the trade is cheap to run, capital supplies it at lower funding rates, so funding stays compressed, the perp tracks its underlying, and the gold buyer gets their ounce's worth a year later. Depositors earn market-neutral yield on the assets they already hold, the venue gets a standing realignment counterparty from day one, and every spot leg is flow that Canton's ecosystem would otherwise never touch.
 
 ### Collateral compatible with every market
 
@@ -329,7 +325,6 @@ Asset Virtualisation is the foundational layer for future Canton capabilities, i
 >
 > - **Luis Cuello, Founder & CEO, [Minted](https://minted.app)**
 
-[^1]: Figures as of June 2026
 [^2]: Aurora on NEAR: DeFi TVL is $3.12M with 138 daily active addresses. Source: DefiLlama, July 2026.
 [^3]: Neon EVM on Solana: DeFi TVL is $80,566, daily active addresses total 148, and 24-hour DEX volume is $39. Source: DefiLlama, July 2026.
 [^4]: Milkomeda (Cardano/Algorand): Milkomeda C1 (Cardano) has a TVL of $0, and Milkomeda A1 (Algorand) has a TVL of $1,146. Both are flagged as deprecated by market indexers. Source: DefiLlama, July 2026.
